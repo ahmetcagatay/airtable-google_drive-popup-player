@@ -24,14 +24,8 @@ When you click on a Drive link, it opens in a **popup window** instead of a new 
 
 #### 1. Download the Extension  
 
-**1.1 🔗 Download Here 👇**  
+**1 🔗 Download Here 👇**  
 [Click here to download](https://github.com/ahmetcagatay/airtable-google_drive-popup-player/archive/refs/heads/main.zip)  
-
-**1.2 Clone the Repository**  
-```bash
-git clone https://github.com/ahmetcagatay/airtable-google_drive-popup-player.git
-cd airtable-drive-link-popup
-```
 
 #### 2. Load the Extension in Chrome  
 - Open `chrome://extensions/` in your browser.  
