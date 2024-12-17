@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Airtable Drive Link Popup",
+  "version": "1.2",
+  "description": "Opens Google Drive links in a popup when clicked on Airtable.",
+  "permissions": ["scripting", "activeTab"],
+  "host_permissions": ["https://airtable.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://airtable.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Activate Drive Link Popup"
+  },
+  "icons": {
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
