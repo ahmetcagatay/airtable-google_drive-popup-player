@@ -31,26 +31,31 @@ When you click on a Drive link, it opens in a **popup window** instead of a new 
 ```bash
 git clone https://github.com/ahmetcagatay/airtable-google_drive-popup-player.git
 cd airtable-drive-link-popup
+```
 
+#### 2. Load the Extension in Chrome  
+- Open `chrome://extensions/` in your browser.  
+- Enable **Developer Mode** (top-right corner).  
+- Click **“Load unpacked”** and select the downloaded folder.  
 
-2.	Load the Extension in Chrome
-•	Open chrome://extensions/ in your browser.
-•	Enable Developer Mode (top-right corner).
-•	Click “Load unpacked” and select the downloaded folder.
+---
 
-3.	Start Using It  
-•	Open Airtable and click on any Google Drive link.
-•	The link will open in a popup window on the right side of your screen.
+#### 3. Start Using It  
+- Open Airtable and click on any Google Drive link.  
+- The link will open in a **popup window** on the right side of your screen.  
 
-Usage Example
-	1.	Navigate to Airtable.
-	2.	Click on a Google Drive link (e.g., https://drive.google.com/file/d/...).
-	3.	The link opens in a vertical popup window without interrupting your workflow.
+---
 
+### Usage Example  
+1. Navigate to Airtable.  
+2. Click on a Google Drive link (e.g., `https://drive.google.com/file/d/...`).  
+3. The link opens in a **vertical popup window** without interrupting your workflow.  
 
-Keywords for GitHub Search
-	•	Chrome Extension
-	•	Airtable Productivity
-	•	Google Drive Links
-	•	Popup Window
-	•	Workflow Efficiency
+---
+
+### Keywords for GitHub Search  
+- **Chrome Extension**  
+- **Airtable Productivity**  
+- **Google Drive Links**  
+- **Popup Window**  
+- **Workflow Efficiency**  
