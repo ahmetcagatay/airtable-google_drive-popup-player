@@ -37,13 +37,14 @@ cd airtable-drive-link-popup
 - Open `chrome://extensions/` in your browser.  
 - Enable **Developer Mode** (top-right corner).  
 - Click **“Load unpacked”** and select the downloaded folder.  
+![image](https://github.com/user-attachments/assets/0bb7b1ff-c691-4a3c-ae45-91c6c0f709bc)
 
 ---
 
 #### 3. Start Using It  
 - Open Airtable and click on any Google Drive link.  
 - The link will open in a **popup window** on the right side of your screen.  
-
+![Popup Demo](https://github.com/user-attachments/assets/4a6359e1-5c0b-4eef-bb6f-6492e6b48a63)  
 ---
 
 ### Usage Example  
