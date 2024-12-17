@@ -21,7 +21,7 @@ Features
 How to Install
 
 1.	Download or Clone the Repository
-git clone https://github.com/yourusername/airtable-google_drive-popup-player.git
+git clone https://github.com/ahmetcagatay/airtable-google_drive-popup-player.git
 cd airtable-drive-link-popup
 
 
