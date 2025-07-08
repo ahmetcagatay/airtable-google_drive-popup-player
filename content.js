@@ -1,45 +1,71 @@
-console.log("Content script yüklendi! Airtable sayfasındayım.");
+document.addEventListener("mouseover", (event) => {
+    const target = event.target;
 
-// Tüm sayfada tıklamaları dinle
-document.addEventListener("click", function (event) {
-    console.log("Tıklama algılandı:", event.target);
+    if (target.tagName.toLowerCase() === "a") {
+        const url = target.href;
 
-    let driveLink = null;
-
-    // En derinden başlayarak en yakın <a> etiketini bul
-    const linkElement = event.target.closest("a");
-    console.log("En yakın <a> etiketi kontrolü:", linkElement);
-
-    // <a> etiketi varsa ve Drive linkini içeriyorsa
-    if (linkElement && linkElement.href.startsWith("https://drive.google.com/file/d/")) {
-        event.preventDefault(); // Varsayılan davranışı engelle
-
-        // Google Drive linkine autoplay parametresi ekle
-        driveLink = linkElement.href;
-        if (!driveLink.includes("?")) {
-            driveLink += "?autoplay=1"; // Eğer query parametresi yoksa
-        } else {
-            driveLink += "&autoplay=1"; // Eğer query varsa
+        if (url.includes("drive.google.com/file/")) {
+            checkAndPlayVideo(url, target);
         }
-
-        console.log("Google Drive linki tespit edildi (autoplay eklendi):", driveLink);
-
-        // Popup boyutları ve konumunu ayarla
-        const popupWidth = 500; // Dikey dikdörtgen genişlik
-        const popupHeight = window.screen.height; // Tüm ekran yüksekliği
-        const popupLeft = window.screen.width - popupWidth; // Sağ tarafa hizala
-        const popupTop = 0; // En üste hizala
-
-        console.log("Popup konumu ve boyutları ayarlandı.");
-
-        // Popup penceresini aç
-        window.open(
-            driveLink,
-            "DrivePopup",
-            `width=${popupWidth},height=${popupHeight},top=${popupTop},left=${popupLeft},scrollbars=yes,resizable=yes`
-        );
-        console.log("Popup açıldı:", driveLink);
-    } else {
-        console.log("Google Drive linki bulunamadı.");
     }
-}, true); // Capturing phase
+});
+
+function checkAndPlayVideo(url, anchorElement) {
+    const fileId = extractDriveFileId(url);
+    if (!fileId) return;
+
+    const iframe = document.createElement("iframe");
+    iframe.style.position = "absolute";
+    iframe.style.width = "300px";
+    iframe.style.height = "480px";
+    iframe.style.border = "1px solid #ccc";
+    iframe.style.zIndex = 9999;
+
+    const rect = anchorElement.getBoundingClientRect();
+    const iframeHeight = 480;
+    const viewportHeight = window.innerHeight;
+
+    let topPosition = rect.bottom + window.scrollY;
+    let leftPosition = rect.left + window.scrollX;
+
+    if (rect.bottom + iframeHeight > viewportHeight) {
+        topPosition = rect.top + window.scrollY - iframeHeight;
+    }
+
+    iframe.style.top = `${topPosition}px`;
+    iframe.style.left = `${leftPosition}px`;
+    iframe.allow = "autoplay";
+
+    iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
+    document.body.appendChild(iframe);
+
+    setTimeout(() => {
+        const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true, view: window });
+        iframe.contentWindow.document.body.dispatchEvent(clickEvent);
+    }, 500);
+
+    let isHovering = true;
+
+    anchorElement.addEventListener("mouseleave", () => {
+        isHovering = false;
+        setTimeout(() => {
+            if (!isHovering) iframe.remove();
+        }, 200);
+    });
+
+    iframe.addEventListener("mouseenter", () => {
+        isHovering = true;
+    });
+
+    iframe.addEventListener("mouseleave", () => {
+        isHovering = false;
+        setTimeout(() => {
+            if (!isHovering) iframe.remove();
+        }, 200);
+    });
+}
+
+function extractDriveFileId(url) {
+    const match = url.match(/\/d\/(.*?)\//);
+    return match ? match[1] : null;
+}
